@@ -129,6 +129,16 @@
                 0 0 150px rgba(135, 95, 165, 0.1);
             animation: float 6s ease-in-out infinite;
             border: 2px solid rgba(187, 153, 213, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.02);
+            box-shadow: 
+                0 0 70px rgba(187, 153, 213, 0.5),
+                0 0 120px rgba(167, 148, 197, 0.3),
+                0 0 180px rgba(135, 95, 165, 0.2);
         }
 
         @keyframes float {
@@ -157,6 +167,37 @@
         @keyframes pulse {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 0.8; }
+        }
+
+        /* Easter Egg Video */
+        #easterEggVideo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 80vw;
+            height: 80vh;
+            max-width: 1200px;
+            max-height: 800px;
+            background: #000;
+            border: 3px solid #bb99d5;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(187, 153, 213, 0.5);
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        #easterEggVideo.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        #easterEggVideo video {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            object-fit: cover;
         }
 
         /* Content Info */
@@ -289,6 +330,11 @@
                 padding: 0.8rem 1rem;
                 font-size: 1rem;
             }
+            
+            #easterEggVideo {
+                width: 95vw;
+                height: 60vh;
+            }
         }
     </style>
 </head>
@@ -298,6 +344,14 @@
         <img src="images/background.gif" alt="CS:GO Animated Background" class="background-gif">
     </div>
     <div class="overlay"></div>
+
+    <!-- Easter Egg Video (Hidden by default) -->
+    <div id="easterEggVideo">
+        <video id="secretVideo" controls>
+            <source src="videos/easter-egg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -314,16 +368,16 @@
     <!-- Main Content -->
     <div class="main-container">
         <div class="content-showcase">
-            <!-- CS:GO Image -->
+            <!-- CS:GO Image with Easter Egg -->
             <div class="image-container">
                 <div class="image-glow"></div>
-                <img src="images/csgo-image.png" alt="CS:GO" class="main-image">
+                <img src="images/csgo-image.png" alt="CS:GO" class="main-image" id="csgoImage">
             </div>
 
             <!-- Content Info -->
             <div class="content-info">
                 <h1 class="content-title">CS:GO</h1>
-                <div class="content-subtitle">Computer Science: Global Offensive</div>
+                <div class="content-subtitle">Counter-Strike: Global Offensive</div>
                 <p class="content-description">
                     Comprehensive study resources and materials for CS:GO. 
                     Access presentations, video guides, test materials, and study guides 
@@ -364,5 +418,44 @@
     <footer class="footer">
         <p>CS:GO Study Resources • Educational Materials</p>
     </footer>
+
+    <script>
+        // Easter Egg Functionality
+        const csgoImage = document.getElementById('csgoImage');
+        const easterEggVideo = document.getElementById('easterEggVideo');
+        const secretVideo = document.getElementById('secretVideo');
+
+        csgoImage.addEventListener('click', function() {
+            // Show the video
+            easterEggVideo.classList.add('show');
+            
+            // Play the video
+            secretVideo.play();
+            
+            // Auto-close when video ends
+            secretVideo.onended = function() {
+                easterEggVideo.classList.remove('show');
+                secretVideo.currentTime = 0; // Reset video
+            };
+            
+            // Also allow clicking outside to close
+            easterEggVideo.addEventListener('click', function(e) {
+                if (e.target === easterEggVideo) {
+                    easterEggVideo.classList.remove('show');
+                    secretVideo.pause();
+                    secretVideo.currentTime = 0;
+                }
+            });
+        });
+
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                easterEggVideo.classList.remove('show');
+                secretVideo.pause();
+                secretVideo.currentTime = 0;
+            }
+        });
+    </script>
 </body>
 </html>
