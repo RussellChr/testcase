@@ -552,6 +552,144 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
+        /* Member Modal */
+        .member-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 90%;
+            max-width: 1000px;
+            max-height: 80vh;
+            background: rgba(26, 35, 126, 0.95);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(187, 153, 213, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(187, 153, 213, 0.5);
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.5s ease;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        body.cyrene-theme .member-modal {
+            background: rgba(126, 26, 95, 0.95);
+            border: 2px solid rgba(255, 156, 214, 0.5);
+            box-shadow: 0 0 50px rgba(255, 156, 214, 0.5);
+        }
+
+        .member-modal.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .member-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(187, 153, 213, 0.3);
+            transition: border-color 0.5s ease;
+        }
+
+        body.cyrene-theme .member-modal-header {
+            border-bottom: 1px solid rgba(255, 156, 214, 0.3);
+        }
+
+        .member-modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.5s ease;
+        }
+
+        .close-member-modal {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-member-modal:hover {
+            background: rgba(187, 153, 213, 0.2);
+            transform: rotate(90deg);
+        }
+
+        body.cyrene-theme .close-member-modal:hover {
+            background: rgba(255, 156, 214, 0.2);
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .member-card {
+            background: rgba(187, 153, 213, 0.1);
+            border: 1px solid rgba(187, 153, 213, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        body.cyrene-theme .member-card {
+            background: rgba(255, 156, 214, 0.1);
+            border: 1px solid rgba(255, 156, 214, 0.3);
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(187, 153, 213, 0.2);
+            background: rgba(187, 153, 213, 0.15);
+        }
+
+        body.cyrene-theme .member-card:hover {
+            box-shadow: 0 10px 20px rgba(255, 156, 214, 0.2);
+            background: rgba(255, 156, 214, 0.15);
+        }
+
+        .member-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(187, 153, 213, 0.3);
+        }
+
+        body.cyrene-theme .member-photo {
+            box-shadow: 0 0 15px rgba(255, 156, 214, 0.3);
+        }
+
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            transition: color 0.5s ease;
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: #e0e0ff;
+            line-height: 1.4;
+        }
+
         /* Responsive Design */
         @media (max-width: 968px) {
             .content-showcase {
@@ -595,6 +733,10 @@
             .modal-content {
                 grid-template-columns: 1fr;
             }
+            
+            .member-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
         }
     </style>
 </head>
@@ -624,15 +766,23 @@
         </div>
     </div>
 
+    <!-- Member Modal -->
+    <div class="member-modal" id="memberModal">
+        <div class="member-modal-header">
+            <h2 class="member-modal-title">Our Team</h2>
+            <button class="close-member-modal" id="closeMemberModal">&times;</button>
+        </div>
+        <div class="member-grid" id="memberGrid">
+            <!-- Member cards will be dynamically added here -->
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">CS:GO RESOURCES</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#materials">Study Materials</a></li>
-            <li><a href="#guides">Guides</a></li>
-            <li><a href="#videos">Videos</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#" id="membersLink">Members</a></li>
         </ul>
     </nav>
 
@@ -964,22 +1114,104 @@
             });
         });
 
-        // Close modal
+        // Close resource modal
         closeModal.addEventListener('click', function() {
             resourceModal.classList.remove('show');
         });
 
-        // Close modal when clicking outside
+        // Close resource modal when clicking outside
         resourceModal.addEventListener('click', function(e) {
             if (e.target === resourceModal) {
                 resourceModal.classList.remove('show');
             }
         });
 
-        // Close modal with Escape key
+        // Member Modal Functionality
+        const memberModal = document.getElementById('memberModal');
+        const memberGrid = document.getElementById('memberGrid');
+        const closeMemberModal = document.getElementById('closeMemberModal');
+        const membersLink = document.getElementById('membersLink');
+
+        // Team member data
+        const teamMembers = [
+            { 
+                name: 'Thomas', 
+                role: 'Team Member',
+                photo: 'images/members/thomas.jpg' // Replace with actual image path
+            },
+            { 
+                name: 'Ann', 
+                role: 'Team Member',
+                photo: 'images/members/ann.jpg' // Replace with actual image path
+            },
+            { 
+                name: 'Kevin', 
+                role: 'Team Member',
+                photo: 'images/members/kevin.jpg' // Replace with actual image path
+            },
+            { 
+                name: 'Nathan', 
+                role: 'Team Member',
+                photo: 'images/members/nathan.jpg' // Replace with actual image path
+            },
+            { 
+                name: 'Richard', 
+                role: 'Team Member',
+                photo: 'images/members/richard.jpg' // Replace with actual image path
+            },
+            { 
+                name: 'Russell', 
+                role: 'Team Member',
+                photo: 'images/members/russell.jpg' // Replace with actual image path
+            }
+        ];
+
+        // Open member modal when members link is clicked
+        membersLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Clear existing member cards
+            memberGrid.innerHTML = '';
+            
+            // Add member cards
+            teamMembers.forEach(member => {
+                const memberCard = document.createElement('div');
+                memberCard.className = 'member-card';
+                memberCard.innerHTML = `
+                    <img src="${member.photo}" alt="${member.name}" class="member-photo">
+                    <div class="member-name">${member.name}</div>
+                    <div class="member-role">${member.role}</div>
+                `;
+                memberGrid.appendChild(memberCard);
+            });
+            
+            memberModal.classList.add('show');
+        });
+
+        // Close member modal
+        closeMemberModal.addEventListener('click', function() {
+            memberModal.classList.remove('show');
+        });
+
+        // Close member modal when clicking outside
+        memberModal.addEventListener('click', function(e) {
+            if (e.target === memberModal) {
+                memberModal.classList.remove('show');
+            }
+        });
+
+        // Close modals with Escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && resourceModal.classList.contains('show')) {
-                resourceModal.classList.remove('show');
+            if (e.key === 'Escape') {
+                if (resourceModal.classList.contains('show')) {
+                    resourceModal.classList.remove('show');
+                }
+                if (memberModal.classList.contains('show')) {
+                    memberModal.classList.remove('show');
+                }
+                easterEggVideo.classList.remove('show');
+                secretVideo.pause();
+                secretVideo.currentTime = 0;
             }
         });
     </script>
