@@ -1319,54 +1319,72 @@
         const closeMemberModal = document.getElementById('closeMemberModal');
         const membersLink = document.getElementById('membersLink');
 
-        // Team member data with theme-specific photos
+// Team member data with theme-specific photos AND roles
         const teamMembers = [
             { 
                 name: 'Thomas', 
-                role: 'Cerydra/Imperator (CEO)',
+                role: {
+                    cs: 'CS:GO Commander (CEO)', // Special role for CS theme
+                    default: 'Cerydra/Imperator (CEO)' // Usual role for other themes
+                },
                 photo: {
-                    cs: 'images/members/cs/thomas.jpg', // Special photo for CS theme
-                    default: 'images/members/thomas.jpg' // Usual photo for other themes
+                    cs: 'images/members/cs/thomas.jpg',
+                    default: 'images/members/thomas.jpg'
                 }
             },
             { 
                 name: 'Ann', 
-                role: 'Hysilens/Knight (Tester)',
+                role: {
+                    cs: 'CS:GO Strategist (Tester)', // Special role for CS theme
+                    default: 'Hysilens/Knight (Tester)' // Usual role for other themes
+                },
                 photo: {
-                    cs: 'images/members/cs/ann.jpg', // Special photo for CS theme
-                    default: 'images/members/ann.jpg' // Usual photo for other themes
+                    cs: 'images/members/cs/ann.jpg',
+                    default: 'images/members/ann.jpg'
                 }
             },
             { 
                 name: 'Kevin', 
-                role: 'Cyrene/Support (Designer)',
+                role: {
+                    cs: 'CS:GO Designer (Designer)', // Special role for CS theme
+                    default: 'Cyrene/Support (Designer)' // Usual role for other themes
+                },
                 photo: {
-                    cs: 'images/members/cs/kevin.jpg', // Special photo for CS theme
-                    default: 'images/members/kevin.jpg' // Usual photo for other themes
+                    cs: 'images/members/cs/kevin.jpg',
+                    default: 'images/members/kevin.jpg'
                 }
             },
             { 
                 name: 'Nathan', 
-                role: 'Evernight/Sub-DPS (Writer)',
+                role: {
+                    cs: 'CS:GO Writer (Writer)', // Special role for CS theme
+                    default: 'Evernight/Sub-DPS (Writer)' // Usual role for other themes
+                },
                 photo: {
-                    cs: 'images/members/cs/nathan.jpg', // Special photo for CS theme
-                    default: 'images/members/nathan.jpg' // Usual photo for other themes
+                    cs: 'images/members/cs/nathan.jpg',
+                    default: 'images/members/nathan.jpg'
                 }
             },
             { 
                 name: 'Richard', 
-                role: 'Hyacine/Healer (CIO)',
+                role: {
+                    cs: 'CS:GO Tech Lead (CIO)', // Special role for CS theme
+                    default: 'Hyacine/Healer (CIO)' // Usual role for other themes
+                },
                 photo: {
-                    cs: 'images/members/cs/richard.jpg', // Special photo for CS theme
-                    default: 'images/members/richard.jpg' // Usual photo for other themes
+                    cs: 'images/members/cs/richard.jpg',
+                    default: 'images/members/richard.jpg'
                 }
             },
             { 
                 name: 'Russell', 
-                role: 'Castorice/DPS (CTO)',
+                role: {
+                    cs: 'CS:GO Developer (CTO)', // Special role for CS theme
+                    default: 'Castorice/DPS (CTO)' // Usual role for other themes
+                },
                 photo: {
-                    cs: 'images/members/cs/russell.jpg', // Special photo for CS theme
-                    default: 'images/members/russell.jpg' // Usual photo for other themes
+                    cs: 'images/members/cs/russell.jpg',
+                    default: 'images/members/russell.jpg'
                 }
             }
         ];
@@ -1375,20 +1393,23 @@
         function getMemberPhoto(member) {
             return currentTheme === 'cs' ? member.photo.cs : member.photo.default;
         }
+        
+        // Function to get the appropriate role based on current theme
+        function getMemberRole(member) {
+            return currentTheme === 'cs' ? member.role.cs : member.role.default;
+        }
 
         // Function to render member cards
         function renderMemberCards() {
-            // Clear existing member cards
             memberGrid.innerHTML = '';
             
-            // Add member cards
             teamMembers.forEach(member => {
                 const memberCard = document.createElement('div');
                 memberCard.className = 'member-card';
                 memberCard.innerHTML = `
                     <img src="${getMemberPhoto(member)}" alt="${member.name}" class="member-photo">
                     <div class="member-name">${member.name}</div>
-                    <div class="member-role">${member.role}</div>
+                    <div class="member-role">${getMemberRole(member)}</div>  <!-- This line uses the helper function -->
                 `;
                 memberGrid.appendChild(memberCard);
             });
