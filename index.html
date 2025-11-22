@@ -20,6 +20,14 @@
 
         /* Theme Variables */
         :root {
+            --primary-color: #4d94ff;
+            --secondary-color: #3366cc;
+            --accent-color: #1a3d99;
+            --background-color: #0a0a1f;
+            --card-bg: rgba(26, 35, 126, 0.2);
+        }
+
+        body.castorice-theme {
             --primary-color: #bb99d5;
             --secondary-color: #a794c5;
             --accent-color: #875fa5;
@@ -63,11 +71,20 @@
             background: linear-gradient(
                 45deg,
                 rgba(26, 35, 126, 0.3) 0%,
-                rgba(123, 31, 162, 0.2) 50%,
+                rgba(31, 123, 162, 0.2) 50%,
                 rgba(10, 10, 31, 0.4) 100%
             );
             z-index: -1;
             transition: background 0.5s ease;
+        }
+
+        body.castorice-theme .overlay {
+            background: linear-gradient(
+                45deg,
+                rgba(26, 35, 126, 0.3) 0%,
+                rgba(123, 31, 162, 0.2) 50%,
+                rgba(10, 10, 31, 0.4) 100%
+            );
         }
 
         body.cyrene-theme .overlay {
@@ -87,12 +104,17 @@
             padding: 1.5rem 3rem;
             background: rgba(26, 35, 126, 0.1);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(187, 153, 213, 0.3);
+            border-bottom: 1px solid rgba(77, 148, 255, 0.3);
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: all 0.5s ease;
+        }
+
+        body.castorice-theme .navbar {
+            background: rgba(26, 35, 126, 0.1);
+            border-bottom: 1px solid rgba(187, 153, 213, 0.3);
         }
 
         body.cyrene-theme .navbar {
@@ -106,8 +128,12 @@
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(187, 153, 213, 0.5);
+            text-shadow: 0 0 20px rgba(77, 148, 255, 0.5);
             transition: all 0.5s ease;
+        }
+
+        body.castorice-theme .logo {
+            text-shadow: 0 0 20px rgba(187, 153, 213, 0.5);
         }
 
         body.cyrene-theme .logo {
@@ -130,6 +156,11 @@
         }
 
         .nav-links a:hover {
+            background: rgba(77, 148, 255, 0.2);
+            text-shadow: 0 0 10px rgba(77, 148, 255, 0.8);
+        }
+
+        body.castorice-theme .nav-links a:hover {
             background: rgba(187, 153, 213, 0.2);
             text-shadow: 0 0 10px rgba(187, 153, 213, 0.8);
         }
@@ -168,13 +199,21 @@
             height: auto;
             border-radius: 20px;
             box-shadow: 
+                0 0 50px rgba(77, 148, 255, 0.3),
+                0 0 100px rgba(51, 102, 204, 0.2),
+                0 0 150px rgba(26, 61, 153, 0.1);
+            animation: float 6s ease-in-out infinite;
+            border: 2px solid rgba(77, 148, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.castorice-theme .main-image {
+            box-shadow: 
                 0 0 50px rgba(187, 153, 213, 0.3),
                 0 0 100px rgba(167, 148, 197, 0.2),
                 0 0 150px rgba(135, 95, 165, 0.1);
-            animation: float 6s ease-in-out infinite;
             border: 2px solid rgba(187, 153, 213, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
         body.cyrene-theme .main-image {
@@ -187,6 +226,13 @@
 
         .main-image:hover {
             transform: scale(1.02);
+            box-shadow: 
+                0 0 70px rgba(77, 148, 255, 0.5),
+                0 0 120px rgba(51, 102, 204, 0.3),
+                0 0 180px rgba(26, 61, 153, 0.2);
+        }
+
+        body.castorice-theme .main-image:hover {
             box-shadow: 
                 0 0 70px rgba(187, 153, 213, 0.5),
                 0 0 120px rgba(167, 148, 197, 0.3),
@@ -214,14 +260,23 @@
             height: 120%;
             background: radial-gradient(
                 circle,
-                rgba(187, 153, 213, 0.2) 0%,
-                rgba(167, 148, 197, 0.1) 30%,
+                rgba(77, 148, 255, 0.2) 0%,
+                rgba(51, 102, 204, 0.1) 30%,
                 transparent 70%
             );
             border-radius: 25px;
             z-index: -1;
             animation: pulse 4s ease-in-out infinite;
             transition: background 0.5s ease;
+        }
+
+        body.castorice-theme .image-glow {
+            background: radial-gradient(
+                circle,
+                rgba(187, 153, 213, 0.2) 0%,
+                rgba(167, 148, 197, 0.1) 30%,
+                transparent 70%
+            );
         }
 
         body.cyrene-theme .image-glow {
@@ -251,10 +306,14 @@
             background: #000;
             border: 3px solid var(--primary-color);
             border-radius: 15px;
-            box-shadow: 0 0 50px rgba(187, 153, 213, 0.5);
+            box-shadow: 0 0 50px rgba(77, 148, 255, 0.5);
             z-index: 9999;
             opacity: 0;
             transition: all 0.5s ease;
+        }
+
+        body.castorice-theme #easterEggVideo {
+            box-shadow: 0 0 50px rgba(187, 153, 213, 0.5);
         }
 
         body.cyrene-theme #easterEggVideo {
@@ -284,14 +343,20 @@
             max-height: 80vh;
             background: rgba(26, 35, 126, 0.95);
             backdrop-filter: blur(15px);
-            border: 2px solid rgba(187, 153, 213, 0.5);
+            border: 2px solid rgba(77, 148, 255, 0.5);
             border-radius: 15px;
-            box-shadow: 0 0 50px rgba(187, 153, 213, 0.5);
+            box-shadow: 0 0 50px rgba(77, 148, 255, 0.5);
             z-index: 9999;
             opacity: 0;
             transition: all 0.5s ease;
             overflow-y: auto;
             padding: 2rem;
+        }
+
+        body.castorice-theme .resource-modal {
+            background: rgba(26, 35, 126, 0.95);
+            border: 2px solid rgba(187, 153, 213, 0.5);
+            box-shadow: 0 0 50px rgba(187, 153, 213, 0.5);
         }
 
         body.cyrene-theme .resource-modal {
@@ -311,8 +376,12 @@
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(187, 153, 213, 0.3);
+            border-bottom: 1px solid rgba(77, 148, 255, 0.3);
             transition: border-color 0.5s ease;
+        }
+
+        body.castorice-theme .modal-header {
+            border-bottom: 1px solid rgba(187, 153, 213, 0.3);
         }
 
         body.cyrene-theme .modal-header {
@@ -344,8 +413,12 @@
         }
 
         .close-modal:hover {
-            background: rgba(187, 153, 213, 0.2);
+            background: rgba(77, 148, 255, 0.2);
             transform: rotate(90deg);
+        }
+
+        body.castorice-theme .close-modal:hover {
+            background: rgba(187, 153, 213, 0.2);
         }
 
         body.cyrene-theme .close-modal:hover {
@@ -359,8 +432,8 @@
         }
 
         .resource-card {
-            background: rgba(187, 153, 213, 0.1);
-            border: 1px solid rgba(187, 153, 213, 0.3);
+            background: rgba(77, 148, 255, 0.1);
+            border: 1px solid rgba(77, 148, 255, 0.3);
             border-radius: 10px;
             padding: 1.5rem;
             transition: all 0.3s ease;
@@ -370,6 +443,11 @@
             color: inherit;
         }
 
+        body.castorice-theme .resource-card {
+            background: rgba(187, 153, 213, 0.1);
+            border: 1px solid rgba(187, 153, 213, 0.3);
+        }
+
         body.cyrene-theme .resource-card {
             background: rgba(255, 156, 214, 0.1);
             border: 1px solid rgba(255, 156, 214, 0.3);
@@ -377,6 +455,11 @@
 
         .resource-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(77, 148, 255, 0.2);
+            background: rgba(77, 148, 255, 0.15);
+        }
+
+        body.castorice-theme .resource-card:hover {
             box-shadow: 0 10px 20px rgba(187, 153, 213, 0.2);
             background: rgba(187, 153, 213, 0.15);
         }
@@ -409,11 +492,15 @@
         .content-info {
             background: var(--card-bg);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(187, 153, 213, 0.3);
+            border: 1px solid rgba(77, 148, 255, 0.3);
             border-radius: 15px;
             padding: 2rem;
             max-width: 400px;
             transition: all 0.5s ease;
+        }
+
+        body.castorice-theme .content-info {
+            border: 1px solid rgba(187, 153, 213, 0.3);
         }
 
         body.cyrene-theme .content-info {
@@ -452,11 +539,16 @@
         }
 
         .stat {
-            background: rgba(187, 153, 213, 0.1);
+            background: rgba(77, 148, 255, 0.1);
             padding: 0.8rem;
             border-radius: 8px;
-            border: 1px solid rgba(187, 153, 213, 0.2);
+            border: 1px solid rgba(77, 148, 255, 0.2);
             transition: all 0.5s ease;
+        }
+
+        body.castorice-theme .stat {
+            background: rgba(187, 153, 213, 0.1);
+            border: 1px solid rgba(187, 153, 213, 0.2);
         }
 
         body.cyrene-theme .stat {
@@ -502,8 +594,12 @@
 
         .resource-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(135, 95, 165, 0.4);
+            box-shadow: 0 5px 15px rgba(26, 61, 153, 0.4);
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        body.castorice-theme .resource-btn:hover {
+            box-shadow: 0 5px 15px rgba(135, 95, 165, 0.4);
         }
 
         body.cyrene-theme .resource-btn:hover {
@@ -516,9 +612,14 @@
             padding: 2rem;
             background: rgba(10, 10, 31, 0.5);
             backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(187, 153, 213, 0.2);
+            border-top: 1px solid rgba(77, 148, 255, 0.2);
             margin-top: 2rem;
             transition: all 0.5s ease;
+        }
+
+        body.castorice-theme .footer {
+            background: rgba(10, 10, 31, 0.5);
+            border-top: 1px solid rgba(187, 153, 213, 0.2);
         }
 
         body.cyrene-theme .footer {
@@ -563,14 +664,20 @@
             max-height: 80vh;
             background: rgba(26, 35, 126, 0.95);
             backdrop-filter: blur(15px);
-            border: 2px solid rgba(187, 153, 213, 0.5);
+            border: 2px solid rgba(77, 148, 255, 0.5);
             border-radius: 15px;
-            box-shadow: 0 0 50px rgba(187, 153, 213, 0.5);
+            box-shadow: 0 0 50px rgba(77, 148, 255, 0.5);
             z-index: 9999;
             opacity: 0;
             transition: all 0.5s ease;
             overflow-y: auto;
             padding: 2rem;
+        }
+
+        body.castorice-theme .member-modal {
+            background: rgba(26, 35, 126, 0.95);
+            border: 2px solid rgba(187, 153, 213, 0.5);
+            box-shadow: 0 0 50px rgba(187, 153, 213, 0.5);
         }
 
         body.cyrene-theme .member-modal {
@@ -590,8 +697,12 @@
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(187, 153, 213, 0.3);
+            border-bottom: 1px solid rgba(77, 148, 255, 0.3);
             transition: border-color 0.5s ease;
+        }
+
+        body.castorice-theme .member-modal-header {
+            border-bottom: 1px solid rgba(187, 153, 213, 0.3);
         }
 
         body.cyrene-theme .member-modal-header {
@@ -623,8 +734,12 @@
         }
 
         .close-member-modal:hover {
-            background: rgba(187, 153, 213, 0.2);
+            background: rgba(77, 148, 255, 0.2);
             transform: rotate(90deg);
+        }
+
+        body.castorice-theme .close-member-modal:hover {
+            background: rgba(187, 153, 213, 0.2);
         }
 
         body.cyrene-theme .close-member-modal:hover {
@@ -638,12 +753,17 @@
         }
 
         .member-card {
-            background: rgba(187, 153, 213, 0.1);
-            border: 1px solid rgba(187, 153, 213, 0.3);
+            background: rgba(77, 148, 255, 0.1);
+            border: 1px solid rgba(77, 148, 255, 0.3);
             border-radius: 10px;
             padding: 1.5rem;
             transition: all 0.3s ease;
             text-align: center;
+        }
+
+        body.castorice-theme .member-card {
+            background: rgba(187, 153, 213, 0.1);
+            border: 1px solid rgba(187, 153, 213, 0.3);
         }
 
         body.cyrene-theme .member-card {
@@ -653,6 +773,11 @@
 
         .member-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(77, 148, 255, 0.2);
+            background: rgba(77, 148, 255, 0.15);
+        }
+
+        body.castorice-theme .member-card:hover {
             box-shadow: 0 10px 20px rgba(187, 153, 213, 0.2);
             background: rgba(187, 153, 213, 0.15);
         }
@@ -669,6 +794,10 @@
             object-fit: cover;
             margin: 0 auto 1rem;
             border: 2px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(77, 148, 255, 0.3);
+        }
+
+        body.castorice-theme .member-photo {
             box-shadow: 0 0 15px rgba(187, 153, 213, 0.3);
         }
 
@@ -743,14 +872,14 @@
 <body>
     <!-- Animated Background -->
     <div class="background-container">
-        <img src="images/background-castorice.gif" alt="CS:GO Animated Background" class="background-gif" id="backgroundGif">
+        <img src="images/background-cs.gif" alt="CS:GO Animated Background" class="background-gif" id="backgroundGif">
     </div>
     <div class="overlay"></div>
 
     <!-- Easter Egg Video (Hidden by default) -->
     <div id="easterEggVideo">
         <video id="secretVideo" controls>
-            <source src="videos/easter-egg-castorice.mp4" type="video/mp4">
+            <source src="videos/easter-egg-cs.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -792,7 +921,7 @@
             <!-- CS:GO Image with Easter Egg -->
             <div class="image-container">
                 <div class="image-glow"></div>
-                <img src="images/csgo-image-castorice.png" alt="CS:GO" class="main-image" id="csgoImage">
+                <img src="images/csgo-image-cs.png" alt="CS:GO" class="main-image" id="csgoImage">
             </div>
 
             <!-- Content Info -->
@@ -808,7 +937,7 @@
                 <div class="resource-stats">
                     <div class="stat">
                         <div class="stat-label">Waifu</div>
-                        <div class="stat-value" id="waifuValue">Castorice</div>
+                        <div class="stat-value" id="waifuValue">CS</div>
                     </div>
                     <div class="stat">
                         <div class="stat-label">Updated</div>
@@ -841,7 +970,7 @@
     </footer>
 
     <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle">🌸</button>
+    <button class="theme-toggle" id="themeToggle">💙</button>
 
     <script>
         // Theme Toggle Functionality
@@ -851,29 +980,87 @@
         const csgoImage = document.getElementById('csgoImage');
         const secretVideo = document.getElementById('secretVideo');
         const waifuValue = document.getElementById('waifuValue');
-        let isCyreneTheme = false;
-
-        themeToggle.addEventListener('click', function() {
-            isCyreneTheme = !isCyreneTheme;
-            
-            if (isCyreneTheme) {
-                // Switch to Cyrene theme (pink)
-                body.classList.add('cyrene-theme');
-                themeToggle.textContent = '💜';
-                backgroundGif.src = 'images/background-cyrene.gif';
-                csgoImage.src = 'images/csgo-image-cyrene.png';
-                secretVideo.src = 'videos/easter-egg-cyrene.mp4';
-                waifuValue.textContent = 'Cyrene';
-            } else {
-                // Switch back to Castorice theme (default)
-                body.classList.remove('cyrene-theme');
-                themeToggle.textContent = '🌸';
-                backgroundGif.src = 'images/background-castorice.gif';
-                csgoImage.src = 'images/csgo-image-castorice.png';
-                secretVideo.src = 'videos/easter-egg-castorice.mp4';
-                waifuValue.textContent = 'Castorice';
+        
+        // Set initial theme to CS (default)
+        let currentTheme = 'cs';
+        
+        // Theme data
+        const themes = {
+            'cs': {
+                name: 'CS',
+                class: '',
+                toggleIcon: '💙',
+                backgroundGif: 'images/background-cs.gif',
+                csgoImage: 'images/csgo-image-cs.png',
+                easterEggVideo: 'videos/easter-egg-cs.mp4',
+                primaryColor: '#4d94ff',
+                secondaryColor: '#3366cc',
+                accentColor: '#1a3d99'
+            },
+            'castorice': {
+                name: 'Castorice',
+                class: 'castorice-theme',
+                toggleIcon: '🌸',
+                backgroundGif: 'images/background-castorice.gif',
+                csgoImage: 'images/csgo-image-castorice.png',
+                easterEggVideo: 'videos/easter-egg-castorice.mp4',
+                primaryColor: '#bb99d5',
+                secondaryColor: '#a794c5',
+                accentColor: '#875fa5'
+            },
+            'cyrene': {
+                name: 'Cyrene',
+                class: 'cyrene-theme',
+                toggleIcon: '💜',
+                backgroundGif: 'images/background-cyrene.gif',
+                csgoImage: 'images/csgo-image-cyrene.png',
+                easterEggVideo: 'videos/easter-egg-cyrene.mp4',
+                primaryColor: '#ff9cd6',
+                secondaryColor: '#ff7eb9',
+                accentColor: '#ff5c9d'
             }
+        };
+
+        // Theme cycle
+        const themeOrder = ['cs', 'castorice', 'cyrene'];
+        
+        themeToggle.addEventListener('click', function() {
+            // Get next theme in cycle
+            const currentIndex = themeOrder.indexOf(currentTheme);
+            const nextIndex = (currentIndex + 1) % themeOrder.length;
+            currentTheme = themeOrder[nextIndex];
+            
+            // Apply theme
+            applyTheme(currentTheme);
         });
+
+        // Function to apply theme
+        function applyTheme(theme) {
+            const themeData = themes[theme];
+            
+            // Remove all theme classes
+            body.classList.remove('castorice-theme', 'cyrene-theme');
+            
+            // Add current theme class if needed
+            if (themeData.class) {
+                body.classList.add(themeData.class);
+            }
+            
+            // Update theme toggle icon
+            themeToggle.textContent = themeData.toggleIcon;
+            
+            // Update background
+            backgroundGif.src = themeData.backgroundGif;
+            
+            // Update CS:GO image
+            csgoImage.src = themeData.csgoImage;
+            
+            // Update easter egg video
+            secretVideo.src = themeData.easterEggVideo;
+            
+            // Update waifu value
+            waifuValue.textContent = themeData.name;
+        }
 
         // Easter Egg Functionality
         const easterEggVideo = document.getElementById('easterEggVideo');
