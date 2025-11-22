@@ -1319,44 +1319,65 @@
         const closeMemberModal = document.getElementById('closeMemberModal');
         const membersLink = document.getElementById('membersLink');
 
-        // Team member data
+        // Team member data with theme-specific photos
         const teamMembers = [
             { 
                 name: 'Thomas', 
                 role: 'Cerydra/Imperator (CEO)',
-                photo: 'images/members/thomas.jpg' // Replace with actual image path
+                photo: {
+                    cs: 'images/members/cs/thomas.jpg', // Special photo for CS theme
+                    default: 'images/members/thomas.jpg' // Usual photo for other themes
+                }
             },
             { 
                 name: 'Ann', 
                 role: 'Hysilens/Knight (Tester)',
-                photo: 'images/members/ann.jpg' // Replace with actual image path
+                photo: {
+                    cs: 'images/members/cs/ann.jpg', // Special photo for CS theme
+                    default: 'images/members/ann.jpg' // Usual photo for other themes
+                }
             },
             { 
                 name: 'Kevin', 
                 role: 'Cyrene/Support (Designer)',
-                photo: 'images/members/kevin.jpg' // Replace with actual image path
+                photo: {
+                    cs: 'images/members/cs/kevin.jpg', // Special photo for CS theme
+                    default: 'images/members/kevin.jpg' // Usual photo for other themes
+                }
             },
             { 
                 name: 'Nathan', 
                 role: 'Evernight/Sub-DPS (Writer)',
-                photo: 'images/members/nathan.jpg' // Replace with actual image path
+                photo: {
+                    cs: 'images/members/cs/nathan.jpg', // Special photo for CS theme
+                    default: 'images/members/nathan.jpg' // Usual photo for other themes
+                }
             },
             { 
                 name: 'Richard', 
                 role: 'Hyacine/Healer (CIO)',
-                photo: 'images/members/richard.jpg' // Replace with actual image path
+                photo: {
+                    cs: 'images/members/cs/richard.jpg', // Special photo for CS theme
+                    default: 'images/members/richard.jpg' // Usual photo for other themes
+                }
             },
             { 
                 name: 'Russell', 
                 role: 'Castorice/DPS (CTO)',
-                photo: 'images/members/russell.jpg' // Replace with actual image path
+                photo: {
+                    cs: 'images/members/cs/russell.jpg', // Special photo for CS theme
+                    default: 'images/members/russell.jpg' // Usual photo for other themes
+                }
             }
         ];
 
-        // Open member modal when members link is clicked
-        membersLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            
+        // Function to get the appropriate photo based on current theme
+        function getMemberPhoto(member) {
+            return currentTheme === 'cs' ? member.photo.cs : member.photo.default;
+        }
+
+        // Function to render member cards
+        function renderMemberCards() {
             // Clear existing member cards
             memberGrid.innerHTML = '';
             
@@ -1365,12 +1386,20 @@
                 const memberCard = document.createElement('div');
                 memberCard.className = 'member-card';
                 memberCard.innerHTML = `
-                    <img src="${member.photo}" alt="${member.name}" class="member-photo">
+                    <img src="${getMemberPhoto(member)}" alt="${member.name}" class="member-photo">
                     <div class="member-name">${member.name}</div>
                     <div class="member-role">${member.role}</div>
                 `;
                 memberGrid.appendChild(memberCard);
             });
+        }
+
+        // Open member modal when members link is clicked
+        membersLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Render member cards with appropriate photos
+            renderMemberCards();
             
             memberModal.classList.add('show');
         });
@@ -1401,6 +1430,17 @@
                 secretVideo.currentTime = 0;
             }
         });
+
+        // Update member photos when theme changes
+        const originalApplyTheme = applyTheme;
+        applyTheme = function(theme) {
+            originalApplyTheme(theme);
+            
+            // If member modal is open, update the photos
+            if (memberModal.classList.contains('show')) {
+                renderMemberCards();
+            }
+        };
     </script>
 </body>
 </html>
